@@ -142,7 +142,8 @@ class CameraRollPicker extends Component {
     } = this.props;
 
     var uri = item.node.image.uri;
-    var isSelected = (this._arrayObjectIndexOf(selected, 'uri', uri) >= 0) ? true : false;
+    var isSelected = !!selected.find(item => item.node.image.uri === uri);
+
 
     return (
       <ImageItem
@@ -190,7 +191,7 @@ class CameraRollPicker extends Component {
     var {maximum, imagesPerRow, callback, selectSingleItem} = this.props;
 
     var selected = this.state.selected,
-        index = this._arrayObjectIndexOf(selected, 'uri', image.uri);
+        index = selected.findIndex(item => image.node.image.uri === uri);
 
     if (index >= 0) {
       selected.splice(index, 1);
@@ -233,10 +234,6 @@ class CameraRollPicker extends Component {
     }
 
     return result;
-  }
-
-  _arrayObjectIndexOf(array, property, value) {
-    return array.map((o) => { return o[property]; }).indexOf(value);
   }
 
 }
