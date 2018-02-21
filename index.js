@@ -32,9 +32,9 @@ class CameraRollPicker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      selected: nextProps.selected,
-    });
+    // this.setState({
+    //   selected: nextProps.selected,
+    // });
   }
 
   fetch() {
@@ -133,7 +133,7 @@ class CameraRollPicker extends Component {
   }
 
   _renderImage(item) {
-    var {selected} = this.state;
+    var { selected } = this.state;
     var {
       imageMargin,
       selectedMarker,
@@ -142,7 +142,7 @@ class CameraRollPicker extends Component {
     } = this.props;
 
     var uri = item.node.image.uri;
-    var isSelected = !!selected.find(item => item.node.image.uri === uri);
+    var isSelected = !!selected.find(img => img.node.image.uri === uri);
 
 
     return (
@@ -191,7 +191,7 @@ class CameraRollPicker extends Component {
     var {maximum, imagesPerRow, callback, selectSingleItem} = this.props;
 
     var selected = this.state.selected,
-        index = selected.findIndex(item => image.node.image.uri === uri);
+        index = selected.findIndex(item => image.node.image.uri === item.node.image.uri);
 
     if (index >= 0) {
       selected.splice(index, 1);
